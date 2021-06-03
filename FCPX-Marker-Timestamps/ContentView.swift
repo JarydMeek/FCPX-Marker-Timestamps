@@ -134,7 +134,7 @@ struct ContentView: View {
             }
         }
     }
-    
+    //MAIN VIEW
     var body: some View {
         GeometryReader { metrics in
             VStack {
