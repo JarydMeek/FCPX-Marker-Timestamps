@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		714BD043266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD042266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift */; };
+		714BD045266894CB0065CFB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD044266894CB0065CFB3 /* ContentView.swift */; };
+		714BD047266894CC0065CFB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714BD046266894CC0065CFB3 /* Assets.xcassets */; };
+		714BD04A266894CC0065CFB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714BD049266894CC0065CFB3 /* Preview Assets.xcassets */; };
+		714BD056266894CC0065CFB3 /* FCPX_Marker_TimestampsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD055266894CC0065CFB3 /* FCPX_Marker_TimestampsTests.swift */; };
+		714BD061266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD060266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		714BD052266894CC0065CFB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 714BD037266894CB0065CFB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 714BD03E266894CB0065CFB3;
+			remoteInfo = "FCPX-Marker-Timestamps";
+		};
+		714BD05D266894CC0065CFB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 714BD037266894CB0065CFB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 714BD03E266894CB0065CFB3;
+			remoteInfo = "FCPX-Marker-Timestamps";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		714BD03F266894CB0065CFB3 /* FCPX-Marker-Timestamps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FCPX-Marker-Timestamps.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		714BD042266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCPX_Marker_TimestampsApp.swift; sourceTree = "<group>"; };
+		714BD044266894CB0065CFB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		714BD046266894CC0065CFB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		714BD049266894CC0065CFB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		714BD04B266894CC0065CFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		714BD04C266894CC0065CFB3 /* FCPX_Marker_Timestamps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FCPX_Marker_Timestamps.entitlements; sourceTree = "<group>"; };
+		714BD051266894CC0065CFB3 /* FCPX-Marker-TimestampsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FCPX-Marker-TimestampsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		714BD055266894CC0065CFB3 /* FCPX_Marker_TimestampsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCPX_Marker_TimestampsTests.swift; sourceTree = "<group>"; };
+		714BD057266894CC0065CFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		714BD05C266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FCPX-Marker-TimestampsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		714BD060266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCPX_Marker_TimestampsUITests.swift; sourceTree = "<group>"; };
+		714BD062266894CC0065CFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		714BD03C266894CB0065CFB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714BD04E266894CC0065CFB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714BD059266894CC0065CFB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		714BD036266894CB0065CFB3 = {
+			isa = PBXGroup;
+			children = (
+				714BD041266894CB0065CFB3 /* FCPX-Marker-Timestamps */,
+				714BD054266894CC0065CFB3 /* FCPX-Marker-TimestampsTests */,
+				714BD05F266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests */,
+				714BD040266894CB0065CFB3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		714BD040266894CB0065CFB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				714BD03F266894CB0065CFB3 /* FCPX-Marker-Timestamps.app */,
+				714BD051266894CC0065CFB3 /* FCPX-Marker-TimestampsTests.xctest */,
+				714BD05C266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		714BD041266894CB0065CFB3 /* FCPX-Marker-Timestamps */ = {
+			isa = PBXGroup;
+			children = (
+				714BD042266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift */,
+				714BD044266894CB0065CFB3 /* ContentView.swift */,
+				714BD046266894CC0065CFB3 /* Assets.xcassets */,
+				714BD04B266894CC0065CFB3 /* Info.plist */,
+				714BD04C266894CC0065CFB3 /* FCPX_Marker_Timestamps.entitlements */,
+				714BD048266894CC0065CFB3 /* Preview Content */,
+			);
+			path = "FCPX-Marker-Timestamps";
+			sourceTree = "<group>";
+		};
+		714BD048266894CC0065CFB3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				714BD049266894CC0065CFB3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		714BD054266894CC0065CFB3 /* FCPX-Marker-TimestampsTests */ = {
+			isa = PBXGroup;
+			children = (
+				714BD055266894CC0065CFB3 /* FCPX_Marker_TimestampsTests.swift */,
+				714BD057266894CC0065CFB3 /* Info.plist */,
+			);
+			path = "FCPX-Marker-TimestampsTests";
+			sourceTree = "<group>";
+		};
+		714BD05F266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				714BD060266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift */,
+				714BD062266894CC0065CFB3 /* Info.plist */,
+			);
+			path = "FCPX-Marker-TimestampsUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		714BD03E266894CB0065CFB3 /* FCPX-Marker-Timestamps */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 714BD065266894CC0065CFB3 /* Build configuration list for PBXNativeTarget "FCPX-Marker-Timestamps" */;
+			buildPhases = (
+				714BD03B266894CB0065CFB3 /* Sources */,
+				714BD03C266894CB0065CFB3 /* Frameworks */,
+				714BD03D266894CB0065CFB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FCPX-Marker-Timestamps";
+			productName = "FCPX-Marker-Timestamps";
+			productReference = 714BD03F266894CB0065CFB3 /* FCPX-Marker-Timestamps.app */;
+			productType = "com.apple.product-type.application";
+		};
+		714BD050266894CC0065CFB3 /* FCPX-Marker-TimestampsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 714BD068266894CC0065CFB3 /* Build configuration list for PBXNativeTarget "FCPX-Marker-TimestampsTests" */;
+			buildPhases = (
+				714BD04D266894CC0065CFB3 /* Sources */,
+				714BD04E266894CC0065CFB3 /* Frameworks */,
+				714BD04F266894CC0065CFB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				714BD053266894CC0065CFB3 /* PBXTargetDependency */,
+			);
+			name = "FCPX-Marker-TimestampsTests";
+			productName = "FCPX-Marker-TimestampsTests";
+			productReference = 714BD051266894CC0065CFB3 /* FCPX-Marker-TimestampsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		714BD05B266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 714BD06B266894CC0065CFB3 /* Build configuration list for PBXNativeTarget "FCPX-Marker-TimestampsUITests" */;
+			buildPhases = (
+				714BD058266894CC0065CFB3 /* Sources */,
+				714BD059266894CC0065CFB3 /* Frameworks */,
+				714BD05A266894CC0065CFB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				714BD05E266894CC0065CFB3 /* PBXTargetDependency */,
+			);
+			name = "FCPX-Marker-TimestampsUITests";
+			productName = "FCPX-Marker-TimestampsUITests";
+			productReference = 714BD05C266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		714BD037266894CB0065CFB3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					714BD03E266894CB0065CFB3 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					714BD050266894CC0065CFB3 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 714BD03E266894CB0065CFB3;
+					};
+					714BD05B266894CC0065CFB3 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 714BD03E266894CB0065CFB3;
+					};
+				};
+			};
+			buildConfigurationList = 714BD03A266894CB0065CFB3 /* Build configuration list for PBXProject "FCPX-Marker-Timestamps" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 714BD036266894CB0065CFB3;
+			productRefGroup = 714BD040266894CB0065CFB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				714BD03E266894CB0065CFB3 /* FCPX-Marker-Timestamps */,
+				714BD050266894CC0065CFB3 /* FCPX-Marker-TimestampsTests */,
+				714BD05B266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		714BD03D266894CB0065CFB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714BD04A266894CC0065CFB3 /* Preview Assets.xcassets in Resources */,
+				714BD047266894CC0065CFB3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714BD04F266894CC0065CFB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714BD05A266894CC0065CFB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		714BD03B266894CB0065CFB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714BD045266894CB0065CFB3 /* ContentView.swift in Sources */,
+				714BD043266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714BD04D266894CC0065CFB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714BD056266894CC0065CFB3 /* FCPX_Marker_TimestampsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714BD058266894CC0065CFB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714BD061266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		714BD053266894CC0065CFB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 714BD03E266894CB0065CFB3 /* FCPX-Marker-Timestamps */;
+			targetProxy = 714BD052266894CC0065CFB3 /* PBXContainerItemProxy */;
+		};
+		714BD05E266894CC0065CFB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 714BD03E266894CB0065CFB3 /* FCPX-Marker-Timestamps */;
+			targetProxy = 714BD05D266894CC0065CFB3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		714BD063266894CC0065CFB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		714BD064266894CC0065CFB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		714BD066266894CC0065CFB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "FCPX-Marker-Timestamps/FCPX_Marker_Timestamps.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"FCPX-Marker-Timestamps/Preview Content\"";
+				DEVELOPMENT_TEAM = 2X8S526W34;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "FCPX-Marker-Timestamps/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jaryd.FCPX-Marker-Timestamps";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		714BD067266894CC0065CFB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "FCPX-Marker-Timestamps/FCPX_Marker_Timestamps.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"FCPX-Marker-Timestamps/Preview Content\"";
+				DEVELOPMENT_TEAM = 2X8S526W34;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "FCPX-Marker-Timestamps/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jaryd.FCPX-Marker-Timestamps";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		714BD069266894CC0065CFB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2X8S526W34;
+				INFOPLIST_FILE = "FCPX-Marker-TimestampsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jaryd.FCPX-Marker-TimestampsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FCPX-Marker-Timestamps.app/Contents/MacOS/FCPX-Marker-Timestamps";
+			};
+			name = Debug;
+		};
+		714BD06A266894CC0065CFB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2X8S526W34;
+				INFOPLIST_FILE = "FCPX-Marker-TimestampsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jaryd.FCPX-Marker-TimestampsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FCPX-Marker-Timestamps.app/Contents/MacOS/FCPX-Marker-Timestamps";
+			};
+			name = Release;
+		};
+		714BD06C266894CC0065CFB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2X8S526W34;
+				INFOPLIST_FILE = "FCPX-Marker-TimestampsUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jaryd.FCPX-Marker-TimestampsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "FCPX-Marker-Timestamps";
+			};
+			name = Debug;
+		};
+		714BD06D266894CC0065CFB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2X8S526W34;
+				INFOPLIST_FILE = "FCPX-Marker-TimestampsUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jaryd.FCPX-Marker-TimestampsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "FCPX-Marker-Timestamps";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		714BD03A266894CB0065CFB3 /* Build configuration list for PBXProject "FCPX-Marker-Timestamps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				714BD063266894CC0065CFB3 /* Debug */,
+				714BD064266894CC0065CFB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		714BD065266894CC0065CFB3 /* Build configuration list for PBXNativeTarget "FCPX-Marker-Timestamps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				714BD066266894CC0065CFB3 /* Debug */,
+				714BD067266894CC0065CFB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		714BD068266894CC0065CFB3 /* Build configuration list for PBXNativeTarget "FCPX-Marker-TimestampsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				714BD069266894CC0065CFB3 /* Debug */,
+				714BD06A266894CC0065CFB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		714BD06B266894CC0065CFB3 /* Build configuration list for PBXNativeTarget "FCPX-Marker-TimestampsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				714BD06C266894CC0065CFB3 /* Debug */,
+				714BD06D266894CC0065CFB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 714BD037266894CB0065CFB3 /* Project object */;
+}
