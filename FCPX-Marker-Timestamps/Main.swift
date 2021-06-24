@@ -14,8 +14,20 @@ class dataHandler {
     var markers:[marker] = []
     
     //Needed Project File Information
-    var projectName:String = "No Project Selected"
-    var frameRate: Double = 0
+    struct Project {
+        var projectName:String = "No Project Selected"
+        var frameRate: Double = 0
+        var fullDuration: String = ""
+        
+        var maxLength: String = ""
+        var hours: Int = 0
+        var mins: Int = 0
+        var seconds: Int = 0
+        var frames: Int = 0
+        var markers:[marker] = []
+        
+        var finalString:String = ""
+    }
     
     struct marker {
         var hours:Int = 0
@@ -70,27 +82,44 @@ class dataHandler {
         }
     }
 
-    //Here's What I need
-    //Overall Framerate
-    //Project Name
-    //
-    
-    func openFile(URL: String) -> Bool {
-        //Empty Marker Array so that we start fresh
-        markers = []
+    func openFile(URL: String, project: inout Project) -> Bool {
+        
+        
         //Try to open the file
         if let contents = try? String(contentsOfFile: String(URL.dropFirst(7))) {
             //Load Project Name
+            var current = contents[...]
             if let range = contents.range(of: "project name=\"") {
-                projectName = String(contents[range.upperBound...contents.index(contents[contents.index(range.upperBound, offsetBy: 1)...].range(of: "\" uid=\"")!.lowerBound, offsetBy: -1)])
+                project.projectName = String(contents[range.upperBound...contents.index(contents[contents.index(range.upperBound, offsetBy: 1)...].range(of: "\" uid=\"")!.lowerBound, offsetBy: -1)])
+                current = contents[range.upperBound...]
+            }
+            var duration = ""
+            //Length
+            if let range = current.range(of: "<sequence duration=\"") {
+                duration = String(current[range.upperBound...current.index(current[current.index(range.upperBound, offsetBy: 1)...].range(of: "s\" format=")!.lowerBound, offsetBy: -1)])
             }
             //FRAME RATE
             if let range = contents.range(of: "frameDuration") {
                 let index = contents.index(range.upperBound, offsetBy: 2)
                 var temp = contents[index...contents[index...].firstIndex(of: "\"")!]
                 temp.removeLast(2)
-                frameRate = (Double(round(1000*(1/(divideNums(input: (String(temp))))))/1000))
-                var current = contents[index...]
+                project.frameRate = (Double(round(1000*(1/(divideNums(input: (String(temp))))))/1000))
+                
+                //Calculate largest value we will have (length of project)
+                (project.hours,project.mins,project.seconds,project.frames) = dropFrameMath(inFrames: Int((divideNums(input: duration)*project.frameRate).rounded()), inRate: project.frameRate)
+                if (project.hours >= 1) {
+                    project.maxLength = "h"
+                    project.fullDuration =  String(format: "%02d", project.hours) + ":" + String(format: "%02d", project.mins) + ":" + String(format: "%02d", project.seconds)
+                } else if (project.mins >= 1) {
+                    project.maxLength = "m"
+                    project.fullDuration =  String(format: "%02d", project.mins) + ":" + String(format: "%02d", project.seconds)
+                } else if (project.seconds >= 1) {
+                    project.maxLength = "s"
+                    project.fullDuration =  String(format: "%02d", project.seconds)
+                } else {
+                    project.maxLength = "f"
+                }
+                
                 //START VALUE
                 if let range2 = contents.range(of: "<spine>") {
                     current = contents[range2.upperBound...]
@@ -128,9 +157,9 @@ class dataHandler {
                         //divide the numbers and do the drop frame math
                         //Calculate raw number
                         let rawTimeCode = (divideNums(input: String(markerPoint)) - divideNums(input: String(start))) + divideNums(input: String(offset))
-                        var rawFrames = (rawTimeCode * frameRate)
+                        var rawFrames = (rawTimeCode * project.frameRate)
                         rawFrames.round()
-                        let (hours, mins, seconds, frames) = dropFrameMath(inFrames:Int(rawFrames), inRate: frameRate)
+                        let (hours, mins, seconds, frames) = dropFrameMath(inFrames:Int(rawFrames), inRate: project.frameRate)
                         
                         var tempMarker = marker()
                         tempMarker.hours = hours
@@ -139,7 +168,7 @@ class dataHandler {
                         tempMarker.frames = frames
                         tempMarker.name = String(value)
                         
-                        markers.append(tempMarker)
+                        project.markers.append(tempMarker)
                         //reset string for next iteration
                         current = current[endValue...]
                     }
@@ -152,16 +181,32 @@ class dataHandler {
             return false
         }
     }
-    func getDataString(URL: String) -> String {
-
+    func getDataString(URL: String, frames: Bool) -> Project {
+        //Create a new project
+        var currProject = Project()
         var storage = ""
-        if data.openFile(URL: URL) {
-            for marker in markers {
-                storage += "\(marker.minutes):\(marker.seconds):\(marker.frames) - \(marker.name)\n"
+        if data.openFile(URL: URL, project: &currProject) {
+            for marker in currProject.markers {
+                if currProject.maxLength == "h" {
+                    storage += String(format: "%02d", marker.hours) + ":" + String(format: "%02d", marker.minutes) + ":" +  String(format: "%02d", marker.seconds)
+                } else if currProject.maxLength == "m" {
+                    storage += String(format: "%02d", marker.minutes) + ":" + String(format: "%02d", marker.seconds)
+                } else if currProject.maxLength == "s" {
+                    storage += String(format: "%02d", marker.seconds)
+                }
+                
+                if frames && currProject.frameRate == (currProject.frameRate.rounded()){
+                    storage += ":" + String(format: "%02d", marker.frames)
+                } else if frames && currProject.frameRate != (currProject.frameRate.rounded()){
+                    storage += ";" + String(format: "%02d", marker.frames)
+                }
+                
+                storage += " - \(marker.name)\n"
             }
-            return storage
+            currProject.finalString = storage
+            return currProject
         } else {
-            return "There was an error loading the data"
+            return Project(finalString: "NULL")
         }
     }
 }
@@ -181,7 +226,7 @@ struct MainButton: ButtonStyle {
 
 var data = dataHandler()
 
-struct ContentView: View {
+struct Main: View {
     @State var showFilePicker = false
     @State var openURL:String = "/No File Selected"
     
@@ -210,7 +255,7 @@ struct ContentView: View {
                     .padding()
                     .multilineTextAlignment(.center)
                     .font(.largeTitle)
-                Text("No File Selected")
+                Text(openURL)
                 Button(action: {
                     openFile()
                 }, label: {
@@ -221,22 +266,25 @@ struct ContentView: View {
                         .padding(.trailing, 20)
                 }).buttonStyle(MainButton())
                 
-                if data.openFile(URL: openURL) {//If file is selected, show extra options
+                if let currentProject = data.getDataString(URL: openURL, frames: true) {//If file is selected, show extra options
+                    if currentProject.finalString != "NULL" {
                     VStack{
                         VStack{
                             Text("Project Name:")
-                            Text(data.projectName)
+                            Text(currentProject.projectName)
+                            Text("Project Duration:")
+                            Text(currentProject.fullDuration)
                         }
                         HStack{
                             Spacer()
                             ScrollView{
                                 VStack{
-                                    Text(data.getDataString(URL: openURL))
+                                    Text(currentProject.finalString).font(Font.custom("Roboto-Mono", size: 14))
                                 }.frame(minWidth: metrics.size.width*0.8)
                             }.background(Color.white)
                             Spacer()
                         }
-                            
+                    }
                     }
                 }
             }.padding(20)
@@ -244,8 +292,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct Main_Preview: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Main()
     }
 }

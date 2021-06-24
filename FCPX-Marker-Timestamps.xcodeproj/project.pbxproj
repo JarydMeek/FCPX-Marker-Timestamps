@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		714BD043266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD042266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift */; };
-		714BD045266894CB0065CFB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD044266894CB0065CFB3 /* ContentView.swift */; };
+		714BD045266894CB0065CFB3 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD044266894CB0065CFB3 /* Main.swift */; };
 		714BD047266894CC0065CFB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714BD046266894CC0065CFB3 /* Assets.xcassets */; };
 		714BD04A266894CC0065CFB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714BD049266894CC0065CFB3 /* Preview Assets.xcassets */; };
 		714BD056266894CC0065CFB3 /* FCPX_Marker_TimestampsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD055266894CC0065CFB3 /* FCPX_Marker_TimestampsTests.swift */; };
 		714BD061266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BD060266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift */; };
+		717C7B8B2684DE75004B47D0 /* Roboto-Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 717C7B8A2684DE75004B47D0 /* Roboto-Mono.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,7 @@
 /* Begin PBXFileReference section */
 		714BD03F266894CB0065CFB3 /* FCPX-Marker-Timestamps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FCPX-Marker-Timestamps.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		714BD042266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCPX_Marker_TimestampsApp.swift; sourceTree = "<group>"; };
-		714BD044266894CB0065CFB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		714BD044266894CB0065CFB3 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		714BD046266894CC0065CFB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		714BD049266894CC0065CFB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		714BD04B266894CC0065CFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +47,7 @@
 		714BD05C266894CC0065CFB3 /* FCPX-Marker-TimestampsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FCPX-Marker-TimestampsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		714BD060266894CC0065CFB3 /* FCPX_Marker_TimestampsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCPX_Marker_TimestampsUITests.swift; sourceTree = "<group>"; };
 		714BD062266894CC0065CFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		717C7B8A2684DE75004B47D0 /* Roboto-Mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Mono.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +99,11 @@
 			isa = PBXGroup;
 			children = (
 				714BD042266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift */,
-				714BD044266894CB0065CFB3 /* ContentView.swift */,
+				714BD044266894CB0065CFB3 /* Main.swift */,
 				714BD046266894CC0065CFB3 /* Assets.xcassets */,
 				714BD04B266894CC0065CFB3 /* Info.plist */,
 				714BD04C266894CC0065CFB3 /* FCPX_Marker_Timestamps.entitlements */,
+				717C7B8A2684DE75004B47D0 /* Roboto-Mono.ttf */,
 				714BD048266894CC0065CFB3 /* Preview Content */,
 			);
 			path = "FCPX-Marker-Timestamps";
@@ -237,6 +240,7 @@
 			files = (
 				714BD04A266894CC0065CFB3 /* Preview Assets.xcassets in Resources */,
 				714BD047266894CC0065CFB3 /* Assets.xcassets in Resources */,
+				717C7B8B2684DE75004B47D0 /* Roboto-Mono.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				714BD045266894CB0065CFB3 /* ContentView.swift in Sources */,
+				714BD045266894CB0065CFB3 /* Main.swift in Sources */,
 				714BD043266894CB0065CFB3 /* FCPX_Marker_TimestampsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
