@@ -35,7 +35,9 @@ class dataHandler {
         var seconds:Int = 0
         var frames:Int = 0
         var name:String = ""
+        var string:String = ""
         let id = UUID()
+        
     }
     
     //A lot of the logic for this function came from here
@@ -52,9 +54,9 @@ class dataHandler {
             
             let addedFrames = (2 * mins) + (-2 * tenMins)
             
-             finalFrames = Double(rawFrames + addedFrames)
+            finalFrames = Double(rawFrames + addedFrames)
         } else {
-             finalFrames = Double(rawFrames)
+            finalFrames = Double(rawFrames)
         }
         
         let hours = Int((((finalFrames / Double(roundedFrameRate)) / 60) / 60).truncatingRemainder(dividingBy: 60))
@@ -65,7 +67,7 @@ class dataHandler {
         return (hours,minutes,seconds,frames)
         
     }
-
+    
     
     func divideNums(input: String) -> Double {
         if input == "0" {
@@ -81,7 +83,7 @@ class dataHandler {
             return -1
         }
     }
-
+    
     func openFile(URL: String, project: inout Project) -> Bool {
         
         
@@ -185,23 +187,32 @@ class dataHandler {
         //Create a new project
         var currProject = Project()
         var storage = ""
-        if data.openFile(URL: URL, project: &currProject) {
-            for marker in currProject.markers {
+        
+        if openFile(URL: URL, project: &currProject) {
+            var tempString = ""
+            var index = 0
+            while index < currProject.markers.count {
+                var marker = currProject.markers[index]
+                tempString = ""
                 if currProject.maxLength == "h" {
-                    storage += String(format: "%02d", marker.hours) + ":" + String(format: "%02d", marker.minutes) + ":" +  String(format: "%02d", marker.seconds)
+                    tempString += String(format: "%02d", marker.hours) + ":" + String(format: "%02d", marker.minutes) + ":" +  String(format: "%02d", marker.seconds)
                 } else if currProject.maxLength == "m" {
-                    storage += String(format: "%02d", marker.minutes) + ":" + String(format: "%02d", marker.seconds)
+                    tempString += String(format: "%02d", marker.minutes) + ":" + String(format: "%02d", marker.seconds)
                 } else if currProject.maxLength == "s" {
-                    storage += String(format: "%02d", marker.seconds)
+                    tempString += String(format: "%02d", marker.seconds)
                 }
                 
                 if frames && currProject.frameRate == (currProject.frameRate.rounded()){
-                    storage += ":" + String(format: "%02d", marker.frames)
+                    tempString += ":" + String(format: "%02d", marker.frames)
                 } else if frames && currProject.frameRate != (currProject.frameRate.rounded()){
-                    storage += ";" + String(format: "%02d", marker.frames)
+                    tempString += ";" + String(format: "%02d", marker.frames)
                 }
                 
-                storage += " - \(marker.name)\n"
+                tempString += " - \(marker.name)"
+                storage += tempString + "\n"
+                marker.string = tempString
+                currProject.markers[index] = marker
+                index += 1
             }
             currProject.finalString = storage
             return currProject
@@ -222,18 +233,19 @@ struct MainButton: ButtonStyle {
     }
 }
 
+
+
 //Instantiate the XML Handler
 
-var data = dataHandler()
+
 
 struct Main: View {
     @State var showFilePicker = false
     @State var openURL:String = "/No File Selected"
     
-    @State var loadedData = false
-    
     @State var addFrames:Bool = false
-    @State var testing = ""
+    @State var data = dataHandler()
+
     
     func openFile() {
         let open = NSOpenPanel()
@@ -247,48 +259,114 @@ struct Main: View {
             }
         }
     }
+    
     //MAIN VIEW
     var body: some View {
         GeometryReader { metrics in
             VStack {
-                Text("Final Cut Pro X\n Marker To Timestamps")
-                    .padding()
-                    .multilineTextAlignment(.center)
-                    .font(.largeTitle)
-                Text(openURL)
-                Button(action: {
-                    openFile()
-                }, label: {
-                    Text("Select File")
-                        .padding(.top, 10)
-                        .padding(.bottom, 10)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 20)
-                }).buttonStyle(MainButton())
-                
-                if let currentProject = data.getDataString(URL: openURL, frames: true) {//If file is selected, show extra options
-                    if currentProject.finalString != "NULL" {
+                HStack{
+                    Spacer()
                     VStack{
-                        VStack{
-                            Text("Project Name:")
-                            Text(currentProject.projectName)
-                            Text("Project Duration:")
-                            Text(currentProject.fullDuration)
-                        }
+                        Image("marker")
+                            .resizable()
+                            .foregroundColor(Color("mainBlue"))
+                            .frame(width:50, height:50)
+                        Text("FCPX Marker To Timestamps")
+                            .padding()
+                            .multilineTextAlignment(.center)
+                            .font(.largeTitle)
                         HStack{
+                            Text(openURL[openURL.index(openURL.lastIndex(of: "/")!, offsetBy: 1)...])
+                            
                             Spacer()
-                            ScrollView{
-                                VStack{
-                                    Text(currentProject.finalString).font(Font.custom("Roboto-Mono", size: 14))
-                                }.frame(minWidth: metrics.size.width*0.8)
-                            }.background(Color.white)
-                            Spacer()
+                                .frame(width: 25)
+                            Button(action: {
+                                openFile()
+                            }, label: {
+                                Text("Select File")
+                                    .padding(.top, 5)
+                                    .padding(.bottom, 5)
+                                    .padding(.leading, 15)
+                                    .padding(.trailing, 15)
+                            }).buttonStyle(MainButton())
                         }
+                        .padding([.top, .bottom, .trailing], 5)
+                        .padding([.leading], 15)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(5)
                     }
+                    Spacer()
+                }
+                Spacer().frame(height: 25)
+                if let currentProject = data.getDataString(URL: openURL, frames: addFrames) {//If file is selected, show extra options
+                    if currentProject.finalString != "NULL"{
+                        VStack{
+                            HStack{
+                                VStack{
+                                    Text("Project Name:")
+                                    Text(currentProject.projectName)
+                                }
+                                .padding([.top, .bottom], 5)
+                                .padding([.leading, .trailing], 15)
+                                .background(Color.white.opacity(0.5))
+                                .cornerRadius(5)
+                                Spacer()
+                                    .frame(width:25)
+                                VStack{
+                                    Text("Project Duration:")
+                                    Text(currentProject.fullDuration)
+                                }
+                                .padding([.top, .bottom], 5)
+                                .padding([.leading, .trailing], 15)
+                                .background(Color.white.opacity(0.5))
+                                .cornerRadius(5)
+                                Spacer()
+                                    .frame(width:25)
+                                Toggle(isOn: $addFrames) {
+                                    Text("Show Frames")
+                                }
+                                .frame(height: 32)
+                                .toggleStyle(CheckboxToggleStyle())
+                                .padding([.top, .bottom], 5)
+                                .padding([.leading, .trailing], 15)
+                                .background(Color.white.opacity(0.5))
+                                .cornerRadius(5)
+                                
+                            }
+                            ZStack(alignment: .bottomTrailing){
+                                List {
+                                    ForEach(currentProject.markers, id: \.id) { marker in
+                                        Text(marker.string).foregroundColor(Color.black)
+                                            .font(Font.custom("Roboto-Mono", size: 16))
+                                        
+                                    }
+                                }.background(Color.white.opacity(0.5))
+                                VStack{
+                                    Spacer()
+                                    Button(action: {
+                                        let pasteboard = NSPasteboard.general
+                                        pasteboard.clearContents()
+                                        pasteboard.setString(currentProject.finalString, forType: .string)
+                                    }){
+                                        Image(systemName: "doc.on.clipboard")
+                                            .font(.system(size: 25))
+                                            .frame(width: 50, height: 50)
+                                            .foregroundColor(Color.white)
+                                            .background(Color.accentColor)
+                                            .clipShape(Circle())
+                                    }.buttonStyle(PlainButtonStyle())
+                                }
+                                .frame(width: 50, height: 50)
+                                .help("Copy Markers To Clipboard")
+                                .padding(15)
+                            }
+                        }
                     }
                 }
             }.padding(20)
         }
+        .background(LinearGradient(gradient: Gradient(colors: [.clear, Color("mainBlue")]), startPoint: .top, endPoint: .bottom))
+        .accentColor(Color("mainBlue"))
     }
 }
 

@@ -13,12 +13,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+struct VisualEffectView: NSViewRepresentable {
+    func makeNSView(context: Context) -> NSVisualEffectView {
+        let view = NSVisualEffectView()
+
+        view.blendingMode = .behindWindow    // << important !!
+        view.isEmphasized = true
+        view.material = .sidebar
+        return view
+    }
+
+    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
+    }
+}
+
 @main
 struct FCPX_Marker_TimestampsApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            Main().frame(minWidth: 800, maxWidth: .infinity, minHeight: 500, maxHeight: .infinity)
-        }
+            Main().frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+                .background(VisualEffectView())
+                .edgesIgnoringSafeArea(.all)
+        }.windowStyle(HiddenTitleBarWindowStyle())
     }
 }
