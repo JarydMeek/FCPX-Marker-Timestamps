@@ -29,7 +29,7 @@ class dataHandler {
         var finalString:String = ""
     }
     
-    struct marker {
+    struct marker: Equatable {
         var hours:Int = 0
         var minutes:Int = 0
         var seconds:Int = 0
@@ -86,7 +86,6 @@ class dataHandler {
     
     func openFile(URL: String, project: inout Project) -> Bool {
         
-        
         //Try to open the file
         if let contents = try? String(contentsOfFile: String(URL.dropFirst(7))) {
             //Load Project Name
@@ -122,59 +121,112 @@ class dataHandler {
                     project.maxLength = "f"
                 }
                 
-                //START VALUE
-                if let range2 = contents.range(of: "<spine>") {
-                    current = contents[range2.upperBound...]
-                }
-                if let range3 = current.range(of: " start=\"") {
-                    var temp = contents[range3.upperBound...contents[range3.upperBound...].firstIndex(of: "\"")!]
-                    temp.removeLast(2)
-                    current = current[range3.upperBound...]
-                }
                 //At This Point, We have the FPS and Project Name. Awesome.
                 
-                //BEGIN MARKERS
-                while current.contains("<marker start=\""){
-                    if let markerRange = current.range(of: "<marker start=\"") {
+                //Marker Time
+                
+                var currentPosition = contents.startIndex
+                
+                while contents[currentPosition...].contains("<marker start=\""){
+                    if let markerPosition = contents[currentPosition...].range(of: "<marker start=\"") {
+                        let markerLine = contents[markerPosition.lowerBound...contents[markerPosition.lowerBound...].range(of: "/>")!.upperBound]
+                        if !markerLine.contains("completed=\"") {
+                            var lines = contents[...markerPosition.lowerBound].split(separator: "\n")
+                            lines.removeLast()
+                            lines.reverse()
+                            //find number of spaces
+                            let markerSpaces = contents[contents[...markerPosition.lowerBound].range(of: "\n", options:String.CompareOptions.backwards)!.upperBound...markerPosition.lowerBound].count
+                            for x in lines {
+                                if let checkIndex = x.range(of: "<"){
+                                    let check = x[...checkIndex.lowerBound]
+                                    if check.count == markerSpaces-4 {
+                                        var test:Bool = true
+                                        for i in 0...markerSpaces-6{
+                                            if check[check.index(check.startIndex, offsetBy: i)] != " " {
+                                                test = false
+                                            }
+
+                                        }
+                                        if test {
+                                            //we have the container for the marker, this should be the clip that we need to base our time off of.
+                                            if x.contains("offset=\"") && x.contains("start=\"") {
+                                                //Offset
+                                                let offsetStart = x.range(of: "offset=\"")
+                                                let offsetEnd = x.index(x[offsetStart!.upperBound...].firstIndex(of: "s")!, offsetBy: -1)
+                                                let offset = String(x[offsetStart!.upperBound...offsetEnd])
+                                                
+                                                //Start
+                                                let startStart = x.range(of: "start=\"")
+                                                let startEnd = x.index(x[startStart!.upperBound...].firstIndex(of: "s")!, offsetBy: -1)
+                                                let start = String(x[startStart!.upperBound...startEnd])
+                                                
+                                                //Marker Start
+                                                let markerStart = markerLine.range(of: "start=\"")
+                                                let markerEnd = markerLine.index(markerLine[markerStart!.upperBound...].firstIndex(of: "s")!, offsetBy: -1)
+                                                let markerInfo = String(markerLine[markerStart!.upperBound...markerEnd])
+                                                
+                                                //Marker Value
+                                                let valueStart = markerLine.range(of: "value=\"")
+                                                let valueEnd = markerLine.index(markerLine[valueStart!.upperBound...].range(of: "\"/>")!.lowerBound, offsetBy: -1)
+                                                let value = String(markerLine[valueStart!.upperBound...valueEnd])
+                                                
+                                                // Need Offset, start and marker information
+                                                let rawTimeCode = (divideNums(input: String(markerInfo)) - divideNums(input: String(start))) + divideNums(input: String(offset))
+                                                var rawFrames = (rawTimeCode * project.frameRate)
+                                                rawFrames.round()
+                                                let (hours, mins, seconds, frames) = dropFrameMath(inFrames:Int(rawFrames), inRate: project.frameRate)
+                                                
+                                                var tempMarker = marker()
+                                                tempMarker.hours = hours
+                                                tempMarker.minutes = mins
+                                                tempMarker.seconds = seconds
+                                                tempMarker.frames = frames
+                                                tempMarker.name = String(value)
+                                                
+                                                project.markers.append(tempMarker)
+                                            } else if x.contains("offset=\"") {
+                                                //only need offset information
+                                                
+                                                //Offset
+                                                let offsetStart = x.range(of: "offset=\"")
+                                                let offsetEnd = x.index(x[offsetStart!.upperBound...].firstIndex(of: "s")!, offsetBy: -1)
+                                                let offset = String(x[offsetStart!.upperBound...offsetEnd])
+
+                                                //Marker Value
+                                                let valueStart = markerLine.range(of: "value=\"")
+                                                let valueEnd = markerLine.index(markerLine[valueStart!.upperBound...].range(of: "\"/>")!.lowerBound, offsetBy: -1)
+                                                let value = String(markerLine[valueStart!.upperBound...valueEnd])
+                                                
+                                                var rawFrames = (divideNums(input: offset) * project.frameRate)
+                                                rawFrames.round()
+                                                let (hours, mins, seconds, frames) = dropFrameMath(inFrames:Int(rawFrames), inRate: project.frameRate)
+                                                
+                                                var tempMarker = marker()
+                                                tempMarker.hours = hours
+                                                tempMarker.minutes = mins
+                                                tempMarker.seconds = seconds
+                                                tempMarker.frames = frames
+                                                tempMarker.name = String(value)
+                                                
+                                                project.markers.append(tempMarker)
+                                                
+                                            }
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        currentPosition = contents[markerPosition.lowerBound...].range(of: "/>")!.upperBound
                         
-                        //Get the Reference Clip information needed for the calculation
-                        let refClipRange = current[...markerRange.lowerBound].range(of:"<ref-clip name=\"",  options: String.CompareOptions.backwards)
-                        let offsetRange = current[refClipRange!.upperBound...markerRange.upperBound].range(of:"offset=\"")
-                        let startRange = current[refClipRange!.upperBound...markerRange.upperBound].range(of:"start=\"")
-                        let offset = current[offsetRange!.upperBound...current.index(current[offsetRange!.upperBound...].firstIndex(of: "\"")!, offsetBy: -2)]
-                        let start = current[startRange!.upperBound...current.index(current[startRange!.upperBound...].firstIndex(of: "\"")!, offsetBy: -2)]
                         
                         
-                        //Get the information needed for the marker point calculation.
-                        let endIndex = current.index(current[markerRange.upperBound...].firstIndex(of: "\"")!, offsetBy: -2)
-                        let markerPoint = current[markerRange.upperBound...endIndex]
-                        
-                        //Get the marker name
-                        let valueRange = current[markerRange.upperBound...].range(of:"value=\"")
-                        let endValue = current.index(current[valueRange!.upperBound...].range(of: "\"/>")!.lowerBound, offsetBy: -1)
-                        let value = current[valueRange!.upperBound...endValue]
-                        
-                        //We have all the information we need. Lets convert these to timecodes.
-                        
-                        //divide the numbers and do the drop frame math
-                        //Calculate raw number
-                        let rawTimeCode = (divideNums(input: String(markerPoint)) - divideNums(input: String(start))) + divideNums(input: String(offset))
-                        var rawFrames = (rawTimeCode * project.frameRate)
-                        rawFrames.round()
-                        let (hours, mins, seconds, frames) = dropFrameMath(inFrames:Int(rawFrames), inRate: project.frameRate)
-                        
-                        var tempMarker = marker()
-                        tempMarker.hours = hours
-                        tempMarker.minutes = mins
-                        tempMarker.seconds = seconds
-                        tempMarker.frames = frames
-                        tempMarker.name = String(value)
-                        
-                        project.markers.append(tempMarker)
-                        //reset string for next iteration
-                        current = current[endValue...]
                     }
                 }
+                
+                
+                
             } else {
                 return false
             }
@@ -183,43 +235,59 @@ class dataHandler {
             return false
         }
     }
-    func getDataString(URL: String, frames: Bool) -> Project {
-        //Create a new project
-        var currProject = Project()
-        var storage = ""
-        
-        if openFile(URL: URL, project: &currProject) {
-            var tempString = ""
-            var index = 0
-            while index < currProject.markers.count {
-                var marker = currProject.markers[index]
-                tempString = ""
-                if currProject.maxLength == "h" {
-                    tempString += String(format: "%02d", marker.hours) + ":" + String(format: "%02d", marker.minutes) + ":" +  String(format: "%02d", marker.seconds)
-                } else if currProject.maxLength == "m" {
-                    tempString += String(format: "%02d", marker.minutes) + ":" + String(format: "%02d", marker.seconds)
-                } else if currProject.maxLength == "s" {
-                    tempString += String(format: "%02d", marker.seconds)
+    
+func getDataString(URL: String, frames: Bool) -> Project {
+    //Create a new project
+    var currProject = Project()
+    var storage = ""
+    
+    if openFile(URL: URL, project: &currProject) {
+        var duplicateCheck:[String] = []
+        for x in currProject.markers {
+            if duplicateCheck.contains(x.name){
+                duplicateCheck.removeAll { $0 == x.name }
+                for y in currProject.markers{
+                    if y.name == x.name {
+                        if let idx = currProject.markers.firstIndex(of: y) {
+                            currProject.markers.remove(at: idx)
+                        }
+                        break
+                    }
                 }
-                
-                if frames && currProject.frameRate == (currProject.frameRate.rounded()){
-                    tempString += ":" + String(format: "%02d", marker.frames)
-                } else if frames && currProject.frameRate != (currProject.frameRate.rounded()){
-                    tempString += ";" + String(format: "%02d", marker.frames)
-                }
-                
-                tempString += " - \(marker.name)"
-                storage += tempString + "\n"
-                marker.string = tempString
-                currProject.markers[index] = marker
-                index += 1
             }
-            currProject.finalString = storage
-            return currProject
-        } else {
-            return Project(finalString: "NULL")
+            duplicateCheck.append(x.name)
         }
+        var tempString = ""
+        var index = 0
+        while index < currProject.markers.count {
+            var marker = currProject.markers[index]
+            tempString = ""
+            if currProject.maxLength == "h" {
+                tempString += String(format: "%02d", marker.hours) + ":" + String(format: "%02d", marker.minutes) + ":" +  String(format: "%02d", marker.seconds)
+            } else if currProject.maxLength == "m" {
+                tempString += String(format: "%02d", marker.minutes) + ":" + String(format: "%02d", marker.seconds)
+            } else if currProject.maxLength == "s" {
+                tempString += String(format: "%02d", marker.seconds)
+            }
+            
+            if frames && currProject.frameRate == (currProject.frameRate.rounded()){
+                tempString += ":" + String(format: "%02d", marker.frames)
+            } else if frames && currProject.frameRate != (currProject.frameRate.rounded()){
+                tempString += ";" + String(format: "%02d", marker.frames)
+            }
+            
+            tempString += " - \(marker.name)"
+            storage += tempString + "\n"
+            marker.string = tempString
+            currProject.markers[index] = marker
+            index += 1
+        }
+        currProject.finalString = storage
+        return currProject
+    } else {
+        return Project(finalString: "NULL")
     }
+}
 }
 
 
@@ -245,7 +313,7 @@ struct Main: View {
     
     @State var addFrames:Bool = false
     @State var data = dataHandler()
-
+    
     
     func openFile() {
         let open = NSOpenPanel()
