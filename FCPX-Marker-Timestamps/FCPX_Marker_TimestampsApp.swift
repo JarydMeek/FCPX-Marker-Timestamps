@@ -16,25 +16,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 struct VisualEffectView: NSViewRepresentable {
     func makeNSView(context: Context) -> NSVisualEffectView {
         let view = NSVisualEffectView()
-
+        
         view.blendingMode = .behindWindow    // << important !!
         view.isEmphasized = true
         view.material = .sidebar
         return view
     }
-
+    
     func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
     }
 }
 
+
+
 @main
 struct FCPX_Marker_TimestampsApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State var showFrames = false
     var body: some Scene {
         WindowGroup {
-            Main().frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+            Main(addFrames: $showFrames).frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
                 .background(VisualEffectView())
                 .edgesIgnoringSafeArea(.all)
         }.windowStyle(HiddenTitleBarWindowStyle())
+        .commands {
+            CommandGroup(replacing: CommandGroupPlacement.textEditing) {
+                Button(action: {showFrames = !showFrames}) {
+                    Text("Toggle Adding Frame Count To Timestamps")
+                }
+            }
+        }
     }
 }

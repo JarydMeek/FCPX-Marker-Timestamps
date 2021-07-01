@@ -72,7 +72,10 @@ class dataHandler {
     func divideNums(input: String) -> Double {
         if input == "0" {
             return 0
+        } else if !(input.contains("/")) {
+            return Double(input)!
         }
+        
         var firstNumStr = input[...input.firstIndex(of: "/")!]
         var secondNumStr = input[input.firstIndex(of: "/")!...]
         firstNumStr.removeLast()
@@ -295,7 +298,7 @@ func getDataString(URL: String, frames: Bool) -> Project {
 struct MainButton: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .foregroundColor(Color.white)
+            .foregroundColor(Color("lightDark"))
             .background(configuration.isPressed ? Color.gray : Color.accentColor)
             .cornerRadius(6)
     }
@@ -311,7 +314,7 @@ struct Main: View {
     @State var showFilePicker = false
     @State var openURL:String = "/No File Selected"
     
-    @State var addFrames:Bool = false
+    @Binding var addFrames:Bool
     @State var data = dataHandler()
     
     
@@ -328,26 +331,21 @@ struct Main: View {
         }
     }
     
+    
+    
     //MAIN VIEW
     var body: some View {
         GeometryReader { metrics in
             VStack {
+                Spacer().frame(height:10)
                 HStack{
-                    Spacer()
-                    VStack{
-                        Image("marker")
-                            .resizable()
-                            .foregroundColor(Color("mainBlue"))
-                            .frame(width:50, height:50)
-                        Text("FCPX Marker To Timestamps")
-                            .padding()
-                            .multilineTextAlignment(.center)
-                            .font(.largeTitle)
+                    HStack{
+                        
                         HStack{
+                            Text("File:").bold()
                             Text(openURL[openURL.index(openURL.lastIndex(of: "/")!, offsetBy: 1)...])
                             
                             Spacer()
-                                .frame(width: 25)
                             Button(action: {
                                 openFile()
                             }, label: {
@@ -357,58 +355,61 @@ struct Main: View {
                                     .padding(.leading, 15)
                                     .padding(.trailing, 15)
                             }).buttonStyle(MainButton())
+                            
                         }
                         .padding([.top, .bottom, .trailing], 5)
                         .padding([.leading], 15)
-                        .background(Color.white.opacity(0.5))
+                        .background(Color("lightDark").opacity(0.5))
                         .cornerRadius(5)
+                        
                     }
-                    Spacer()
                 }
-                Spacer().frame(height: 25)
                 if let currentProject = data.getDataString(URL: openURL, frames: addFrames) {//If file is selected, show extra options
                     if currentProject.finalString != "NULL"{
                         VStack{
-                            HStack{
-                                VStack{
-                                    Text("Project Name:")
+                            VStack{
+                                HStack{
+                                    Text("Project Name:").bold()
                                     Text(currentProject.projectName)
+                                    Spacer()
                                 }
                                 .padding([.top, .bottom], 5)
                                 .padding([.leading, .trailing], 15)
-                                .background(Color.white.opacity(0.5))
+                                .background(Color("lightDark").opacity(0.5))
                                 .cornerRadius(5)
-                                Spacer()
-                                    .frame(width:25)
-                                VStack{
-                                    Text("Project Duration:")
+                                HStack{
+                                    Text("Project Duration:").bold()
                                     Text(currentProject.fullDuration)
+                                    Spacer()
                                 }
                                 .padding([.top, .bottom], 5)
                                 .padding([.leading, .trailing], 15)
-                                .background(Color.white.opacity(0.5))
+                                .background(Color("lightDark").opacity(0.5))
                                 .cornerRadius(5)
-                                Spacer()
-                                    .frame(width:25)
-                                Toggle(isOn: $addFrames) {
-                                    Text("Show Frames")
-                                }
-                                .frame(height: 32)
-                                .toggleStyle(CheckboxToggleStyle())
-                                .padding([.top, .bottom], 5)
-                                .padding([.leading, .trailing], 15)
-                                .background(Color.white.opacity(0.5))
-                                .cornerRadius(5)
-                                
                             }
                             ZStack(alignment: .bottomTrailing){
-                                List {
+                                ScrollView {
                                     ForEach(currentProject.markers, id: \.id) { marker in
-                                        Text(marker.string).foregroundColor(Color.black)
-                                            .font(Font.custom("Roboto-Mono", size: 16))
-                                        
+                                        VStack{
+                                            HStack{
+                                                Text(marker.string)
+                                                    .foregroundColor(Color("darkLight"))
+                                                Spacer()
+                                            }
+                                            Spacer().frame(height:5)
+                                        }
                                     }
-                                }.background(Color.white.opacity(0.5))
+                                    VStack{
+                                        HStack{
+                                            Spacer()
+                                        }
+                                        Spacer().frame(height:5)
+                                    }
+                                }
+                                .padding([.top, .bottom, .trailing], 5)
+                                .padding([.leading], 15)
+                                .background(Color("lightDark").opacity(0.5))
+                                .cornerRadius(5)
                                 VStack{
                                     Spacer()
                                     Button(action: {
@@ -419,7 +420,7 @@ struct Main: View {
                                         Image(systemName: "doc.on.clipboard")
                                             .font(.system(size: 25))
                                             .frame(width: 50, height: 50)
-                                            .foregroundColor(Color.white)
+                                            .foregroundColor(Color("lightDark"))
                                             .background(Color.accentColor)
                                             .clipShape(Circle())
                                     }.buttonStyle(PlainButtonStyle())
@@ -430,16 +431,18 @@ struct Main: View {
                             }
                         }
                     }
+                } else {
+                    Text("To Get .fcpxml file:\nopen the project in Final Cut Pro X, and use File > Export XML to generate file.\nSelect that file to load your markers.")
                 }
             }.padding(20)
         }
-        .background(LinearGradient(gradient: Gradient(colors: [.clear, Color("mainBlue")]), startPoint: .top, endPoint: .bottom))
         .accentColor(Color("mainBlue"))
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
 struct Main_Preview: PreviewProvider {
     static var previews: some View {
-        Main()
+        Main(addFrames: .constant(true))
     }
 }
