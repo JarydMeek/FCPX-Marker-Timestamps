@@ -238,7 +238,8 @@ class dataHandler {
             return false
         }
     }
-    
+
+//convert url into project
 func getDataString(URL: String, frames: Bool) -> Project {
     //Create a new project
     var currProject = Project()
@@ -304,12 +305,7 @@ struct MainButton: ButtonStyle {
     }
 }
 
-
-
-//Instantiate the XML Handler
-
-
-
+//main ui
 struct Main: View {
     @State var showFilePicker = false
     @State var openURL:String = "/No File Selected"
@@ -317,7 +313,7 @@ struct Main: View {
     @State var addFrames:Bool = false
     @State var data = dataHandler()
     
-    
+    //handle macos file picker
     func openFile() {
         let open = NSOpenPanel()
         open.canChooseFiles = true
@@ -441,6 +437,7 @@ struct Main: View {
     }
 }
 
+//debugging stuff
 struct Main_Preview: PreviewProvider {
     static var previews: some View {
         Main()
