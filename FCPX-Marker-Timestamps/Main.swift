@@ -28,7 +28,7 @@ class dataHandler {
         
         var finalString:String = ""
     }
-    
+    //store data about each marker
     struct marker: Equatable {
         var hours:Int = 0
         var minutes:Int = 0
@@ -40,9 +40,12 @@ class dataHandler {
         
     }
     
-    //A lot of the logic for this function came from here
+    //A lot of the general drop-frame logic for this function came from here
     //http://www.andrewduncan.net/timecodes/
     
+    //drop frame math is hard.
+    
+    //converts frame number to hours, mins, seconds, and frames
     func dropFrameMath(inFrames: Int, inRate: Double) -> (Int, Int, Int, Int){
         let rawFrames = inFrames
         let roundedFrameRate = Int(inRate.rounded())
@@ -68,7 +71,7 @@ class dataHandler {
         
     }
     
-    
+    //divides two numbers ina string given in the fcpxml file
     func divideNums(input: String) -> Double {
         if input == "0" {
             return 0
